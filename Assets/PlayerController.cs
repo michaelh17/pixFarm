@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         if(movementInput != Vector2.zero)
         {
-            rb.Cast()
+            //rb.Cast();
         }
     }
 
