@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
-    Vector2 movementInput;
+    public float speed = 1f;
+    Vector2 movement;
     Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -15,17 +15,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
+    private void Update()
+    {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+    }
     private void FixedUpdate()
     {
-        if(movementInput != Vector2.zero)
-        {
-            //rb.Cast();
-        }
-    }
-
-    void Onmove(InputValue movementValue)
-    {
-        movementInput = movementValue.Get<Vector2>();
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 }
