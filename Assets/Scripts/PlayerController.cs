@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 1f;
     Vector2 movement;
     Rigidbody2D rb;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        anim.SetFloat("Horizontal", movement.x);
+        anim.SetFloat("Vertical", movement.y);
+        anim.SetFloat("Speed", movement.sqrMagnitude);
+
     }
     private void FixedUpdate()
     {
