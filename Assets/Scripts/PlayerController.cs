@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     Vector2 movement;
     Rigidbody2D rb;
     public Animator anim;
+    public coinCounter coins;
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +30,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Fruits"))
+        {
+            Debug.Log(collision);
+            Destroy(collision.gameObject);
+
+            coins.earnedCoin += 500;
+        }
     }
 }
