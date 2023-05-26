@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public Animator anim;
     public coinCounter coins;
+    public healthController life;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +37,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Fruits"))
         {
-            Debug.Log(collision);
             Destroy(collision.gameObject);
 
             coins.earnedCoin += 500;
+            coins.collect += 1;
         }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(collision.gameObject);
+            life.maxLifes -= 1;
+        }
+
     }
+
+    
 }

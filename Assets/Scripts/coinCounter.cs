@@ -7,7 +7,9 @@ public class coinCounter : MonoBehaviour
 {
 
     public int earnedCoin;
+    public int collect;
     public Text coinText;
+    public Text collected;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +20,6 @@ public class coinCounter : MonoBehaviour
     void Update()
     {
         coinText.text = earnedCoin.ToString();
+        collected.text = "Collected Farmables : " + collect.ToString() + "/7";
     }
 }
