@@ -11,11 +11,15 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public coinCounter coins;
     public healthController life;
+    public float isAttack;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+
     }
 
     private void Update()
@@ -26,6 +30,19 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Horizontal", movement.x);
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
+        //anim.SetFloat("isAttack",0);
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            anim.SetFloat("isAttack", 1);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            anim.SetFloat("isAttack", 0);
+        }
+
+
+
 
     }
     private void FixedUpdate()
