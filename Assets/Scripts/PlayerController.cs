@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Horizontal", movement.x);
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
-        //anim.SetFloat("isAttack",0);
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetFloat("isAttack", 1);
@@ -40,9 +40,6 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetFloat("isAttack", 0);
         }
-
-
-
 
     }
     private void FixedUpdate()
@@ -62,10 +59,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
             life.maxLifes -= 1;
         }
-
     }
 
     
