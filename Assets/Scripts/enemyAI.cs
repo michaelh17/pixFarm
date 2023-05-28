@@ -4,36 +4,47 @@ using UnityEngine;
 
 public class enemyAI : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 0.2f;
-    Rigidbody2D rb;
+    public GameObject pointA;
+    public GameObject pointB;
+    public float speed;
+    private Rigidbody2D rb;
+    private Animator anim;
+    private Transform currentPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        currentPoint = pointB.transform;
+        anim.SetBool("isRunning", true);
     }
 
     // Update is called once per frame
     void Update()
     {
-     
-        if (IsFacingRight())
+        Vector2 point = currentPoint.position - transform.position;
+
+        if(currentPoint == pointB.transform)
         {
-            rb.velocity = new Vector2(moveSpeed, 0f);
+            rb.velocity = new Vector2(speed, 0);
         }
         else
         {
-            rb.velocity = new Vector2(-moveSpeed, 0f);
+            rb.velocity = new Vector2(-speed, 0);
+        }
+
+        if(Vector2.Distance(transform.position,currentPoint.position) < 0.1f && currentPoint == pointB.transform)
+        {
+            currentPoint = pointA.transform;
+        }
+
+        else if (Vector2.Distance(transform.position, currentPoint.position) < 0.1f && currentPoint == pointA.transform)
+        {
+            currentPoint = pointB.transform;
         }
     }
+    
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), transform.localScale.y);
-    }
 
-    private bool IsFacingRight()
-    {
-        return transform.localScale.x > Mathf.Epsilon;
-    }
 }
