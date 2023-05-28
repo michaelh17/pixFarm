@@ -11,12 +11,15 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public coinCounter coins;
     public healthController life;
+    public deadController mati;
+    public winController winner;
     public float isAttack;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
 
 
@@ -55,6 +58,15 @@ public class PlayerController : MonoBehaviour
 
             coins.earnedCoin += 500;
             coins.collect += 1;
+           
+
+            if(coins.collect == 7)
+            {
+                Time.timeScale = 0;
+                winner.showPanel();
+            }
+
+
         }
 
         if (collision.gameObject.CompareTag("Enemy"))
@@ -64,5 +76,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void deadCondition()
+    {
+        Time.timeScale = 0;
+        anim.Play("down");
+        mati.showPanel();
+    }
     
 }

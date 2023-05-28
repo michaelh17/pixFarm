@@ -6,6 +6,7 @@ public class healthController : MonoBehaviour
 {
     public GameObject[] health;
     public int maxLifes;
+    public PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class healthController : MonoBehaviour
         if (maxLifes < 1)
         {
             Destroy(health[0].gameObject);
+            pc.deadCondition();
         }
 
         else if (maxLifes < 2)
