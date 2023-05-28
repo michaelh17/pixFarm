@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public audioManager aud;
     public float speed = 1f;
     Vector2 movement;
     Rigidbody2D rb;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        aud.Play(0);
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
 
@@ -64,6 +66,9 @@ public class PlayerController : MonoBehaviour
             {
                 Time.timeScale = 0;
                 winner.showPanel();
+
+                aud.StopSong();
+                aud.Play(1);
             }
 
 
@@ -72,7 +77,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             life.maxLifes -= 1;
-            Debug.Log("hit!");
+
+
+            if (life.maxLifes == 0)
+            {
+                aud.StopSong();
+                aud.Play(2);
+            }
+
         }
     }
 

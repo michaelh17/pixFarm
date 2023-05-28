@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class winController : MonoBehaviour
 {
-
     public GameObject win;
     // Start is called before the first frame update
     void Start()
@@ -20,8 +19,9 @@ public class winController : MonoBehaviour
     }
 
     public void showPanel()
-    {
+    { 
         win.SetActive(true);
+
     }
 
 

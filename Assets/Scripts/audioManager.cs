@@ -18,7 +18,7 @@ public class audioManager : MonoBehaviour
     public void Play(int clipIDX)
     {
         AS.PlayOneShot(clips[clipIDX]);
-        AS.volume = 0.35f;
+        AS.volume = 0.20f;
     }
 
     public void StopSong()
